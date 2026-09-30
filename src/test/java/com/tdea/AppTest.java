@@ -1,4 +1,4 @@
-package com.tdea;
+package src.test.java.com.tdea;
 
 import static org.junit.Assert.assertTrue;
 
