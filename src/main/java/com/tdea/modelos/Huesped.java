@@ -14,4 +14,20 @@ public class Huesped {
         this.edad = edad;
         this.genero = genero;
     }
+
+    public String getDocumento(){
+        return this.documento;
+    }
+
+    public String getNombre(){
+        return this.nombre;
+    }
+
+    public Integer getEdad(){
+        return this.edad;
+    }
+
+    public Generos getGenero(){
+        return this.genero;
+    }
 }

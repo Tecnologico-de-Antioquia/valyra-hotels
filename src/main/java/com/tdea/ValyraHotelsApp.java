@@ -22,7 +22,9 @@ public class ValyraHotelsApp {
 
         welcomeValyraHotels();
 
-        // Huesped pablo = new Huesped("123456789", "Juan Pablo", 32, Generos.Hombre);
+        Huesped pablo = new Huesped("123456789", "Juan Pablo", 32, Generos.Hombre);
+
+        System.out.println(pablo.getDocumento());
     }
 
     public static void welcomeValyraHotels(){
