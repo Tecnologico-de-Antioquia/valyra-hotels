@@ -1,4 +1,4 @@
-package src.main.java.com.tdea.estructura;
+package com.tdea.estructura;
 
 /**
  * Almacena un valor y un nodo siguiente

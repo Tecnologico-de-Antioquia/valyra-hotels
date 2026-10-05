@@ -1,8 +1,9 @@
-package src.main.java.com.tdea;
+package com.tdea;
 
-import src.main.java.com.tdea.estructura.NodoSimple;
-
-import src.main.java.com.tdea.consola.CLI;
+import com.tdea.estructura.NodoSimple;
+import com.tdea.modelos.Huesped;
+import com.tdea.consola.CLI;
+import com.tdea.compartidos.enums.Generos;
 
 /*
 Valyra Hotels es una aplicación de gestión hotelera desarrollada
@@ -20,6 +21,8 @@ public class ValyraHotelsApp {
         // System.out.println(primerNodo.getValor());
 
         welcomeValyraHotels();
+
+        // Huesped pablo = new Huesped("123456789", "Juan Pablo", 32, Generos.Hombre);
     }
 
     public static void welcomeValyraHotels(){

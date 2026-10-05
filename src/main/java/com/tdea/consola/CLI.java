@@ -1,4 +1,4 @@
-package src.main.java.com.tdea.consola;
+package com.tdea.consola;
 
 public class CLI {
     /**
