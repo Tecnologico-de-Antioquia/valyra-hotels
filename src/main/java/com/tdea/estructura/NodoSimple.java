@@ -7,7 +7,7 @@ package com.tdea.estructura;
 
 public class NodoSimple<T> {
     private T valor;
-    private NodoSimple<T> siguiente;
+    private NodoSimple<T> siguiente = null;
 
     public NodoSimple(T valor) {
         this.valor = valor;

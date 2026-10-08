@@ -19,11 +19,7 @@ public class CLI {
     private String RESET = "\u001B[0m";
 
     public void mostrarTitulo(String title, String color) {
-        System.out.println(color + """
-                ***************************
-                %s
-                ***************************
-                """.formatted(title.toUpperCase()) + RESET);
+        System.out.println(color + "\n***************************\n%s\n***************************\n".formatted(title.toUpperCase()) + RESET);
     }
 
     public void mostrarTexto(String texto, String color) {
@@ -35,16 +31,19 @@ public class CLI {
     }
 
     public Integer mostrarMenu() {
+        // limpiarConsola();
+
         mostrarTitulo("Bienvenido a Valyra Hotels", PURPLE);
 
         mostrarTexto("Seleccione una opción del siguiente menú\n", BLUE);
 
         mostrarTexto("1. Ingresar huesped a la cola");
-        mostrarTexto("2. Atender huesped (Check-in)\n");
+        mostrarTexto("2. Atender huesped (Check-in)");
+        mostrarTexto("3. Mostrar cola de atención\n");
 
         Integer opcion = null;
 
-        while (opcion == null || opcion > 2){
+        while (opcion == null || opcion > 3){
            opcion = leerNatural("");
         }
 

@@ -2,6 +2,7 @@ package com.tdea.modelos;
 
 import com.tdea.compartidos.enums.Generos;
 import com.tdea.consola.CLI;
+import com.tdea.modelos.ColaAtencion;
 
 public class HuespedServicio {
     public static CLI consola = new CLI();
@@ -22,5 +23,9 @@ public class HuespedServicio {
         Integer edad = consola.leerNatural("Ingrese la edad del huesped");
 
         Huesped nuevoHuesped = new Huesped(documento, nombre, edad, Generos.Hombre);
+
+        ColaAtencion colaAtencion = new ColaAtencion();
+
+        colaAtencion.agregarHuesped(nuevoHuesped);
     }
 }

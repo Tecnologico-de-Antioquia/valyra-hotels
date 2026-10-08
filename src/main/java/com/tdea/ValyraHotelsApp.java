@@ -18,6 +18,7 @@ public class ValyraHotelsApp {
     private static ColaAtencion cola = new ColaAtencion();
 
     public static void main(String[] args) {
+        consola.limpiarConsola();
         // NodoSimple<Integer> primerNodo = new NodoSimple<>(1);
         // NodoSimple<Integer> nuevoNodo = new NodoSimple<>(2);
         // primerNodo.setSiguiente(nuevoNodo);
@@ -27,7 +28,7 @@ public class ValyraHotelsApp {
 
     }
 
-    public static void welcomeValyraHotels(){
+    public static void welcomeValyraHotels() {
         Integer opcion = consola.mostrarMenu();
 
         switch (opcion) {
@@ -35,9 +36,19 @@ public class ValyraHotelsApp {
                 HuespedServicio huespedServicio = new HuespedServicio();
                 huespedServicio.agregarHuespedCola();
                 break;
-        
+            case 2:
+                // HuespedServicio huespedServicio = new HuespedServicio();
+                // huespedServicio.agregarHuespedCola();
+                break;
+            case 3:
+                ColaAtencion colaAtencion = new ColaAtencion();
+                colaAtencion.mostrarColaAtencion();
+                break;
+
             default:
                 break;
         }
+
+        welcomeValyraHotels();
     }
 }
