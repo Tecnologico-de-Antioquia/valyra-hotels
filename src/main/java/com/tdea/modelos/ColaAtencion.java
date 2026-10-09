@@ -7,10 +7,10 @@ import com.tdea.consola.CLI;
 
 public class ColaAtencion {
 
-    private ColaAtencion colaAtencion = null;
-    public NodoSimple cola = null;
+    private static final ColaAtencion colaAtencion = new ColaAtencion();
+    public NodoSimple<Huesped> cola = null;
 
-    public static CLI consola = new CLI();
+    public CLI consola = new CLI();
 
     private String RED = "\u001B[31m";
     private String GREEN = "\u001B[32m";
@@ -20,12 +20,10 @@ public class ColaAtencion {
     private String CYAN = "\u001B[36m";
     private String RESET = "\u001B[0m";
 
-    public ColaAtencion ColaAtencion(){
-        if(colaAtencion == null){
-            ColaAtencion colaAtencion = new ColaAtencion();
-            return colaAtencion;
-        }
+    private ColaAtencion(){
+    }
 
+    public static ColaAtencion getInstancia() {
         return colaAtencion;
     }
 

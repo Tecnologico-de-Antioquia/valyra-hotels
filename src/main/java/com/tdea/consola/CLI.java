@@ -31,7 +31,6 @@ public class CLI {
     }
 
     public Integer mostrarMenu() {
-        // limpiarConsola();
 
         mostrarTitulo("Bienvenido a Valyra Hotels", PURPLE);
 
@@ -53,7 +52,8 @@ public class CLI {
 
     public String leerTexto(String mensaje){
         System.out.print(CYAN + mensaje + ": " + RESET);
-        return escaner.nextLine();
+        String texto = escaner.nextLine();
+        return texto;
     }
 
     public Integer leerNatural(String mensaje){
@@ -62,6 +62,7 @@ public class CLI {
         while (number == null || number < 0) {
             System.out.print(CYAN + mensaje + ": " + RESET);
             number = escaner.nextInt();
+            escaner.nextLine();
         }
 
         return number;

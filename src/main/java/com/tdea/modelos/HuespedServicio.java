@@ -6,6 +6,7 @@ import com.tdea.modelos.ColaAtencion;
 
 public class HuespedServicio {
     public static CLI consola = new CLI();
+    private static ColaAtencion colaAtencion = ColaAtencion.getInstancia();
 
     private String RED = "\u001B[31m";
     private String GREEN = "\u001B[32m";
@@ -23,8 +24,6 @@ public class HuespedServicio {
         Integer edad = consola.leerNatural("Ingrese la edad del huesped");
 
         Huesped nuevoHuesped = new Huesped(documento, nombre, edad, Generos.Hombre);
-
-        ColaAtencion colaAtencion = new ColaAtencion();
 
         colaAtencion.agregarHuesped(nuevoHuesped);
     }

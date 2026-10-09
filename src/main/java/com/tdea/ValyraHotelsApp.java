@@ -15,17 +15,11 @@ es facilitar la administración de las operaciones básicas de un hotel de maner
 
 public class ValyraHotelsApp {
     public static CLI consola = new CLI();
-    private static ColaAtencion cola = new ColaAtencion();
+    private static ColaAtencion colaAtencion = ColaAtencion.getInstancia();
 
     public static void main(String[] args) {
         consola.limpiarConsola();
-        // NodoSimple<Integer> primerNodo = new NodoSimple<>(1);
-        // NodoSimple<Integer> nuevoNodo = new NodoSimple<>(2);
-        // primerNodo.setSiguiente(nuevoNodo);
-        // System.out.println(primerNodo.getValor());
-
         welcomeValyraHotels();
-
     }
 
     public static void welcomeValyraHotels() {
@@ -37,11 +31,9 @@ public class ValyraHotelsApp {
                 huespedServicio.agregarHuespedCola();
                 break;
             case 2:
-                // HuespedServicio huespedServicio = new HuespedServicio();
-                // huespedServicio.agregarHuespedCola();
+                //
                 break;
             case 3:
-                ColaAtencion colaAtencion = new ColaAtencion();
                 colaAtencion.mostrarColaAtencion();
                 break;
 
