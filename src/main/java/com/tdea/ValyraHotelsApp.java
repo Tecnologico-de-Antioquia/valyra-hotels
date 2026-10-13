@@ -6,6 +6,7 @@ import com.tdea.modelos.Huesped;
 import com.tdea.consola.CLI;
 import com.tdea.compartidos.enums.Generos;
 import com.tdea.modelos.HuespedServicio;
+import com.tdea.modelos.ListaHuespedes;
 
 /*
 Valyra Hotels es una aplicación de gestión hotelera desarrollada
@@ -16,6 +17,8 @@ es facilitar la administración de las operaciones básicas de un hotel de maner
 public class ValyraHotelsApp {
     public static CLI consola = new CLI();
     private static ColaAtencion colaAtencion = ColaAtencion.getInstancia();
+    private static ListaHuespedes listaHuespedes = ListaHuespedes.getInstancia();
+    private static HuespedServicio huespedServicio = new HuespedServicio();
 
     public static void main(String[] args) {
         consola.limpiarConsola();
@@ -27,14 +30,16 @@ public class ValyraHotelsApp {
 
         switch (opcion) {
             case 1:
-                HuespedServicio huespedServicio = new HuespedServicio();
                 huespedServicio.agregarHuespedCola();
                 break;
             case 2:
-                //
+                huespedServicio.checkInHuesped();
                 break;
             case 3:
                 colaAtencion.mostrarColaAtencion();
+                break;
+            case 4:
+                listaHuespedes.mostrarListaHuespedes();
                 break;
 
             default:

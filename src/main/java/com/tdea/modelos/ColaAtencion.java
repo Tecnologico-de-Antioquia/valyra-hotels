@@ -20,45 +20,62 @@ public class ColaAtencion {
     private String CYAN = "\u001B[36m";
     private String RESET = "\u001B[0m";
 
-    private ColaAtencion(){
+    private ColaAtencion() {
     }
 
     public static ColaAtencion getInstancia() {
         return colaAtencion;
     }
 
-    public void agregarHuesped(Huesped nuevoHuesped){
+    public void agregarHuesped(Huesped nuevoHuesped) {
         NodoSimple<Huesped> nuevoNodo = new NodoSimple<>(nuevoHuesped);
-        
+
+        if (cola == null) {
+            cola = nuevoNodo;
+            return;
+        }
+
         NodoSimple auxiliar = cola;
 
-        if(auxiliar == null){
-            auxiliar = nuevoNodo;
-        }else{
-            while (auxiliar.getSiguiente() != null){
-                auxiliar = auxiliar.getSiguiente();
-            }
-    
-            auxiliar.setSiguiente(nuevoNodo);
+        while (auxiliar.getSiguiente() != null) {
+            auxiliar = auxiliar.getSiguiente();
         }
-        
-        cola = auxiliar;
+
+        auxiliar.setSiguiente(nuevoNodo);
+
     }
 
-    public void mostrarColaAtencion(){
-        consola.mostrarTexto("\n---COLA DE ATENCIÓN---\n", CYAN);
-        
+    public Huesped atenderHuesped() {
+        if (cola == null) {
+            consola.mostrarTexto("\n---COLA DE ATENCIÓN---\n", CYAN);
+            consola.mostrarTexto("No hay huespedes para atender");
+            return null;
+        }
+
         NodoSimple auxiliar = cola;
-        
-        if(auxiliar == null){
+
+        cola = cola.getSiguiente();
+        auxiliar.setSiguiente(null);
+
+        Huesped huesped = (Huesped) auxiliar.getValor();
+        return huesped;
+    }
+
+    public void mostrarColaAtencion() {
+        consola.mostrarTexto("\n---COLA DE ATENCIÓN---\n", CYAN);
+
+        NodoSimple auxiliar = cola;
+
+        if (auxiliar == null) {
             consola.mostrarTexto("No hay huespedes en la cola de atención");
             return;
         }
 
         Integer i = 1;
-        while (auxiliar != null){
+        while (auxiliar != null) {
             Huesped huesped = (Huesped) auxiliar.getValor();
-            consola.mostrarTexto(i + ". " + huesped.getNombre());
+            consola.mostrarTexto(i + ". " + huesped.getNombre() + " - " + huesped.getDocumento() + " - "
+                    + huesped.getEdad() + " años.");
             auxiliar = auxiliar.getSiguiente();
             i = i + 1;
         }

@@ -1,12 +1,14 @@
 package com.tdea.modelos;
 
 import com.tdea.compartidos.enums.Generos;
+import src.main.java.com.tdea.modelos.Habitacion;
 
 public class Huesped {
     private String documento;
     private String nombre;
     private Integer edad;
     private Generos genero;
+    private Habitacion habitacion;
 
     public Huesped(String documento, String nombre, Integer edad, Generos genero){
         this.documento = documento;
@@ -29,5 +31,13 @@ public class Huesped {
 
     public Generos getGenero(){
         return this.genero;
+    }
+
+    public Habitacion getHabitacion(){
+        return this.habitacion;
+    }
+
+    public void setHabitacion(Habitacion habitacion){
+        this.habitacion = habitacion;
     }
 }
