@@ -35,6 +35,8 @@ public class HuespedServicio {
     }
 
     public void checkInHuesped(){
+        consola.mostrarTitulo("Registrar Huesped", PURPLE);
+
         Huesped huesped = colaAtencion.atenderHuesped();
 
         if(huesped == null){
@@ -42,20 +44,20 @@ public class HuespedServicio {
         }
 
         Integer numeroHabitacion = consola.leerNatural("Ingrese el numero de habitación");
-        Integer tipoHabitacionAux = 0;
-        TipoHabitacion tipoHabitacion = TipoHabitacion.sencilla;
+        TipoHabitacion tipoHabitacion = null;
 
-        while(tipoHabitacionAux >= 1 && tipoHabitacionAux <= 3 ){
+        while(tipoHabitacion == null){
             Integer tipoHabitacionAux = consola.leerNatural("Ingrese el tipo de habitación (1: sencilla / 2: doble / 3: familiar)");
+
+            if(tipoHabitacionAux == 1){
+                tipoHabitacion = TipoHabitacion.sencilla;
+            } else if(tipoHabitacionAux == 2){
+                tipoHabitacion = TipoHabitacion.doble;
+            }else{
+                tipoHabitacion = TipoHabitacion.familiar;
+            }
         }
 
-        if(tipoHabitacionAux == 1){
-            tipoHabitacion = TipoHabitacion.sencilla;
-        } else if(tipoHabitacionAux == 2){
-            tipoHabitacion = TipoHabitacion.doble;
-        }else{
-            tipoHabitacion = TipoHabitacion.familiar;
-        }
 
         Habitacion nuevaHabitacion = new Habitacion(numeroHabitacion, tipoHabitacion, EstadoHabitacion.ocupada);
         huesped.setHabitacion(nuevaHabitacion);

@@ -54,7 +54,7 @@ public class ListaHuespedes {
         while (auxiliar != null) {
             Huesped huesped = (Huesped) auxiliar.getValor();
             consola.mostrarTexto(i + ". " + huesped.getNombre() + " - " + huesped.getDocumento() + " - "
-                    + huesped.getEdad() + " años." + " - " + huesped.getHabitacion().getNumero());
+                    + huesped.getEdad() + " años." + " - " + huesped.getHabitacion().getNumero() + " - " + huesped.getHabitacion().getTipoHabitacion());
             auxiliar = auxiliar.getSiguiente();
             i = i + 1;
         }
