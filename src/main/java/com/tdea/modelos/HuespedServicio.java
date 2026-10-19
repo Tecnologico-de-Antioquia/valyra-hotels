@@ -6,8 +6,7 @@ import com.tdea.compartidos.enums.TipoHabitacion;
 import com.tdea.consola.CLI;
 import com.tdea.estructura.NodoSimple;
 import com.tdea.modelos.ColaAtencion;
-
-import src.main.java.com.tdea.modelos.Habitacion;
+import com.tdea.modelos.Habitacion;
 
 public class HuespedServicio {
     public static CLI consola = new CLI();
@@ -34,34 +33,16 @@ public class HuespedServicio {
         colaAtencion.agregarHuesped(nuevoHuesped);
     }
 
-    public void checkInHuesped(){
-        consola.mostrarTitulo("Registrar Huesped", PURPLE);
-
+    public void checkInHuesped(HabitacionServicio habitacionServicio){
         Huesped huesped = colaAtencion.atenderHuesped();
-
+        
         if(huesped == null){
             return;
         }
 
-        Integer numeroHabitacion = consola.leerNatural("Ingrese el numero de habitación");
-        TipoHabitacion tipoHabitacion = null;
+        consola.mostrarTitulo("Registrar Huesped (check-in)", PURPLE);
 
-        while(tipoHabitacion == null){
-            Integer tipoHabitacionAux = consola.leerNatural("Ingrese el tipo de habitación (1: sencilla / 2: doble / 3: familiar)");
-
-            if(tipoHabitacionAux == 1){
-                tipoHabitacion = TipoHabitacion.sencilla;
-            } else if(tipoHabitacionAux == 2){
-                tipoHabitacion = TipoHabitacion.doble;
-            }else{
-                tipoHabitacion = TipoHabitacion.familiar;
-            }
-        }
-
-
-        Habitacion nuevaHabitacion = new Habitacion(numeroHabitacion, tipoHabitacion, EstadoHabitacion.ocupada);
-        huesped.setHabitacion(nuevaHabitacion);
-
-        listaHuespedes.checkInHuesped(huesped);
+        habitacionServicio.asignarHabitacion(huesped);
+        listaHuespedes.regitrarHuesped(huesped);
     }
 }

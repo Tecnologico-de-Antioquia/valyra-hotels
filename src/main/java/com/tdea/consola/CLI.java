@@ -65,6 +65,10 @@ public class CLI {
             System.out.print(CYAN + mensaje + ": " + RESET);
             number = escaner.nextInt();
             escaner.nextLine();
+
+            if(number < 0){
+                System.out.print(RED + "\nEl dato debe ser positivo\n" + RESET);
+            }
         }
 
         return number;

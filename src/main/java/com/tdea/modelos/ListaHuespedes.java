@@ -25,7 +25,7 @@ public class ListaHuespedes {
         return listaHuespedes;
     }
 
-    public void checkInHuesped(Huesped nuevoHuesped) {
+    public void regitrarHuesped(Huesped nuevoHuesped) {
         NodoSimple<Huesped> nuevoNodo = new NodoSimple<>(nuevoHuesped);
 
         if (lista == null) {
@@ -53,8 +53,12 @@ public class ListaHuespedes {
         Integer i = 1;
         while (auxiliar != null) {
             Huesped huesped = (Huesped) auxiliar.getValor();
-            consola.mostrarTexto(i + ". " + huesped.getNombre() + " - " + huesped.getDocumento() + " - "
-                    + huesped.getEdad() + " años." + " - " + huesped.getHabitacion().getNumero() + " - " + huesped.getHabitacion().getTipoHabitacion());
+            consola.mostrarTexto(i + ". " + "-----------------------");
+            consola.mostrarTexto(huesped.getNombre() + " - " + huesped.getDocumento() + " - "
+                    + huesped.getEdad() + " años");
+            consola.mostrarTexto("Habitación: " + huesped.getHabitacion().getNumero() + " - "
+                    + huesped.getHabitacion().getTipoHabitacion());
+            consola.mostrarTexto("-----------------------\n");
             auxiliar = auxiliar.getSiguiente();
             i = i + 1;
         }

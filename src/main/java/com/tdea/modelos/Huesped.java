@@ -1,7 +1,7 @@
 package com.tdea.modelos;
 
 import com.tdea.compartidos.enums.Generos;
-import src.main.java.com.tdea.modelos.Habitacion;
+import com.tdea.modelos.Habitacion;
 
 public class Huesped {
     private String documento;

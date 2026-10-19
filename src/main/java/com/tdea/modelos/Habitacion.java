@@ -1,4 +1,4 @@
-package src.main.java.com.tdea.modelos;
+package com.tdea.modelos;
 
 import com.tdea.compartidos.enums.EstadoHabitacion;
 import com.tdea.compartidos.enums.TipoHabitacion;
@@ -24,5 +24,9 @@ public class Habitacion {
 
     public EstadoHabitacion getEstadoHabitacion(){
         return this.estado;
+    }
+
+    public void setEstadoHabitacion(EstadoHabitacion estadoHabitacion){
+        this.estado = estadoHabitacion;
     }
 }
