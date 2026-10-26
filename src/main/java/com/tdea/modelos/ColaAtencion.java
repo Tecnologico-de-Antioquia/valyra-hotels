@@ -48,7 +48,7 @@ public class ColaAtencion {
     public Huesped atenderHuesped() {
         if (cola == null) {
             consola.mostrarTexto("\n---COLA DE ATENCIÓN---\n", CYAN);
-            consola.mostrarTexto("No hay huespedes para atender");
+            consola.mostrarTexto("No hay huéspedes para atender");
             return null;
         }
 
@@ -67,7 +67,7 @@ public class ColaAtencion {
         NodoSimple auxiliar = cola;
 
         if (auxiliar == null) {
-            consola.mostrarTexto("No hay huespedes en la cola de atención");
+            consola.mostrarTexto("No hay huéspedes en la cola de atención");
             return;
         }
 
@@ -75,7 +75,7 @@ public class ColaAtencion {
         while (auxiliar != null) {
             Huesped huesped = (Huesped) auxiliar.getValor();
             consola.mostrarTexto(i + ". " + huesped.getNombre() + " - " + huesped.getDocumento() + " - "
-                    + huesped.getEdad() + " años.");
+                    + huesped.getEdad() + " años." + " - " + huesped.getGenero());
             auxiliar = auxiliar.getSiguiente();
             i = i + 1;
         }

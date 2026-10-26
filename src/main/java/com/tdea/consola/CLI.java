@@ -38,13 +38,16 @@ public class CLI {
 
         mostrarTexto("1. Ingresar huesped a la cola");
         mostrarTexto("2. Atender huesped (Check-in)");
-        mostrarTexto("3. Mostrar cola de atención");
-        mostrarTexto("4. Mostrar huespedes registrados");
+        mostrarTexto("3. Retirar huesped (Check-out)");
+        mostrarTexto("4. Adquirir un servicio");
+        mostrarTexto("5. Mostrar cola de atención");
+        mostrarTexto("6. Mostrar huéspedes registrados");
+        mostrarTexto("7. Mostrar métricas");
         mostrarTexto("\n");
 
         Integer opcion = null;
 
-        while (opcion == null || opcion > 4){
+        while (opcion == null || opcion > 7){
            opcion = leerNatural("");
         }
 

@@ -28,21 +28,47 @@ public class HuespedServicio {
         String nombre = consola.leerTexto("Ingrese el nombre del huesped");
         Integer edad = consola.leerNatural("Ingrese la edad del huesped");
 
-        Huesped nuevoHuesped = new Huesped(documento, nombre, edad, Generos.Hombre);
+        Generos genero = null;
+        while (genero == null) {
+            Integer generoAux = consola
+                    .leerNatural("Ingrese el genero del huesped (1. Hombre, 2. Mujer, 3. Indeterminado)");
+            if (generoAux == 1) {
+                genero = Generos.Hombre;
+            } else if (generoAux == 2) {
+                genero = Generos.Mujer;
+            } else if (generoAux == 3) {
+                genero = Generos.Mujer;
+            }
+        }
+
+        Huesped nuevoHuesped = new Huesped(documento, nombre, edad, genero);
 
         colaAtencion.agregarHuesped(nuevoHuesped);
     }
 
-    public void checkInHuesped(HabitacionServicio habitacionServicio){
+    public void checkInHuesped(HabitacionServicio habitacionServicio) {
         Huesped huesped = colaAtencion.atenderHuesped();
-        
-        if(huesped == null){
+
+        if (huesped == null) {
             return;
         }
 
         consola.mostrarTitulo("Registrar Huesped (check-in)", PURPLE);
 
         habitacionServicio.asignarHabitacion(huesped);
+        listaHuespedes.regitrarHuesped(huesped);
+    }
+
+    public void checkOutHuesped(HabitacionServicio habitacionServicio) {
+        String documentoHuesped = consola.leerTexto("Ingrese el documento del huésped");
+        Huesped huesped = listaHuespedes.buscarHuesped(documentoHuesped);
+
+        if (huesped == null) {
+            return;
+        }
+
+        consola.mostrarTitulo("Retirar Huesped (check-out)", PURPLE);
+
         listaHuespedes.regitrarHuesped(huesped);
     }
 }

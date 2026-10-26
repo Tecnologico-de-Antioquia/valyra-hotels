@@ -25,6 +25,32 @@ public class ListaHuespedes {
         return listaHuespedes;
     }
 
+    public Huesped buscarHuesped(String documentoHuesped) {
+
+        NodoSimple auxiliar = lista;
+
+        if (auxiliar == null) {
+            consola.mostrarTexto("No hay huéspedes registrados");
+            return null;
+        }
+
+        Huesped huesped = (Huesped) auxiliar.getValor();
+
+        while (auxiliar != null && !huesped.getDocumento().equals(documentoHuesped)) {
+            auxiliar = auxiliar.getSiguiente();
+            if (auxiliar != null) {
+                huesped = (Huesped) auxiliar.getValor();
+            }
+        }
+
+        if (auxiliar == null) {
+            consola.mostrarTexto("\nNo se encontró el huésped\n", RED);
+            return null;
+        } else {
+            return huesped;
+        }
+    }
+
     public void regitrarHuesped(Huesped nuevoHuesped) {
         NodoSimple<Huesped> nuevoNodo = new NodoSimple<>(nuevoHuesped);
 
@@ -40,13 +66,45 @@ public class ListaHuespedes {
         lista = nuevoNodo;
     }
 
+    public void retirarHuesped(Huesped huespedRetiro) {
+
+        NodoSimple auxiliar = lista;
+
+        Huesped huesped = (Huesped) auxiliar.getValor();
+
+        if(huesped.equals(huespedRetiro)){
+            lista = auxiliar.getSiguiente();
+            auxiliar.setSiguiente(null);
+            return;
+        }
+
+        Huesped huespedTemp = null;
+
+        while (auxiliar != null && !huespedTemp.equals(huespedRetiro)) {
+
+            auxiliarTemp = auxiliar.getSiguiente();
+            if (auxiliarTemp != null) {
+                huespedTemp = (Huesped) auxiliarTemp.getValor();
+            }
+
+            
+        }
+
+        if (auxiliar == null) {
+            consola.mostrarTexto("\nNo se pudo retirar el huésped\n", RED);
+        }else{
+            auxiliarAnterior.setSiguiente(auxiliar.getSiguiente());
+            auxiliar.setSiguiente(null);
+        }
+    }
+
     public void mostrarListaHuespedes() {
         consola.mostrarTexto("\n---LISTA DE HUESPEDES---\n", CYAN);
 
         NodoSimple auxiliar = lista;
 
         if (auxiliar == null) {
-            consola.mostrarTexto("No hay huespedes registrados");
+            consola.mostrarTexto("No hay huéspedes registrados");
             return;
         }
 
