@@ -67,35 +67,26 @@ public class ListaHuespedes {
     }
 
     public void retirarHuesped(Huesped huespedRetiro) {
+        NodoSimple<Huesped> actual = lista;
+        NodoSimple<Huesped> anterior = null;
 
-        NodoSimple auxiliar = lista;
+        while (actual != null && (huespedRetiro == null || !huespedRetiro.equals(actual.getValor()))) {
+            anterior = actual;
+            actual = actual.getSiguiente();
+        }
 
-        Huesped huesped = (Huesped) auxiliar.getValor();
-
-        if(huesped.equals(huespedRetiro)){
-            lista = auxiliar.getSiguiente();
-            auxiliar.setSiguiente(null);
+        if (actual == null) {
+            consola.mostrarTexto("\nNo se pudo retirar el huésped\n", RED);
             return;
         }
 
-        Huesped huespedTemp = null;
-
-        while (auxiliar != null && !huespedTemp.equals(huespedRetiro)) {
-
-            auxiliarTemp = auxiliar.getSiguiente();
-            if (auxiliarTemp != null) {
-                huespedTemp = (Huesped) auxiliarTemp.getValor();
-            }
-
-            
+        if (anterior == null) {
+            lista = actual.getSiguiente();
+        } else {
+            anterior.setSiguiente(actual.getSiguiente());
         }
 
-        if (auxiliar == null) {
-            consola.mostrarTexto("\nNo se pudo retirar el huésped\n", RED);
-        }else{
-            auxiliarAnterior.setSiguiente(auxiliar.getSiguiente());
-            auxiliar.setSiguiente(null);
-        }
+        actual.setSiguiente(null);
     }
 
     public void mostrarListaHuespedes() {
