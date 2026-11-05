@@ -1,10 +1,12 @@
 package com.tdea.consola;
 
+import java.util.InputMismatchException;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class CLI {
 
-    private Scanner escaner = new Scanner(System.in);
+    private static final Scanner escaner = new Scanner(System.in);
 
     /**
      * Colores para la consola
@@ -30,6 +32,10 @@ public class CLI {
         System.out.println(texto);
     }
 
+    public String formatearMoneda(double valor) {
+        return String.format(Locale.US, "$%,.0f", valor);
+    }
+
     public Integer mostrarMenu() {
 
         mostrarTitulo("Bienvenido a Valyra Hotels", PURPLE);
@@ -43,41 +49,67 @@ public class CLI {
         mostrarTexto("5. Mostrar cola de atención");
         mostrarTexto("6. Mostrar huéspedes registrados");
         mostrarTexto("7. Mostrar métricas");
+        mostrarTexto("8. Mostrar cola de masajes");
+        mostrarTexto("9. Finalizar servicio de masaje");
+        mostrarTexto("10. Mostrar servicios");
+        mostrarTexto("11. Mostrar habitaciones");
+        mostrarTexto("0. Salir");
         mostrarTexto("\n");
 
         Integer opcion = null;
 
-        while (opcion == null || opcion > 7){
-           opcion = leerNatural("");
+        while (opcion == null || opcion < 0 || opcion > 11) {
+            opcion = leerNatural("");
         }
 
         limpiarConsola();
         return opcion;
     }
 
-    public String leerTexto(String mensaje){
+    public String leerTexto(String mensaje) {
         System.out.print(CYAN + mensaje + ": " + RESET);
         String texto = escaner.nextLine();
         return texto;
     }
 
-    public Integer leerNatural(String mensaje){
+    public Integer leerNatural(String mensaje) {
         Integer number = null;
 
         while (number == null || number < 0) {
             System.out.print(CYAN + mensaje + ": " + RESET);
-            number = escaner.nextInt();
-            escaner.nextLine();
 
-            if(number < 0){
-                System.out.print(RED + "\nEl dato debe ser positivo\n" + RESET);
+            try {
+                number = escaner.nextInt();
+                escaner.nextLine();
+
+                if (number < 0) {
+                    System.out.print(RED + "\nEl dato debe ser positivo\n" + RESET);
+                }
+            } catch (InputMismatchException e) {
+                escaner.nextLine();
+                System.out.print(RED + "\nIngrese un número válido\n" + RESET);
+                number = null;
             }
         }
 
         return number;
     }
 
-    public void limpiarConsola(){
+    public Integer leerEnteroPositivo(String mensaje) {
+        Integer number = null;
+
+        while (number == null || number <= 0) {
+            number = leerNatural(mensaje);
+
+            if (number <= 0) {
+                System.out.print(RED + "\nEl dato debe ser mayor que cero\n" + RESET);
+            }
+        }
+
+        return number;
+    }
+
+    public void limpiarConsola() {
         try {
             new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
         } catch (Exception e) {

@@ -1,6 +1,5 @@
 package com.tdea.modelos;
 
-import com.tdea.modelos.Habitacion;
 import com.tdea.compartidos.enums.EstadoHabitacion;
 import com.tdea.consola.CLI;
 import com.tdea.estructura.NodoSimple;
@@ -34,35 +33,35 @@ public class ListaHabitaciones {
             return;
         }
 
-        NodoSimple auxiliar = lista;
+        NodoSimple<Habitacion> auxiliar = lista;
 
         nuevoNodo.setSiguiente(auxiliar);
 
         lista = nuevoNodo;
     }
 
-    public Habitacion buscarHabitacion(Integer numeroHabitacion){
-        
-        NodoSimple auxiliar = lista;
+    public Habitacion buscarHabitacion(Integer numeroHabitacion) {
+
+        NodoSimple<Habitacion> auxiliar = lista;
 
         if (auxiliar == null) {
             consola.mostrarTexto("No hay habitaciones creadas");
             return null;
         }
 
-        Habitacion habitacion = (Habitacion) auxiliar.getValor();
-        
+        Habitacion habitacion = auxiliar.getValor();
+
         while (auxiliar != null && habitacion.getNumero().compareTo(numeroHabitacion) != 0) {
             auxiliar = auxiliar.getSiguiente();
-            if(auxiliar != null){
-                habitacion = (Habitacion) auxiliar.getValor();
+            if (auxiliar != null) {
+                habitacion = auxiliar.getValor();
             }
         }
 
-        if(auxiliar == null){
+        if (auxiliar == null) {
             consola.mostrarTexto("\nNo se encontró la habitación\n", RED);
             return null;
-        }else{
+        } else {
             return habitacion;
         }
     }
@@ -70,7 +69,7 @@ public class ListaHabitaciones {
     public void mostrarListaHabitaciones() {
         consola.mostrarTexto("\n---LISTA DE HABITACIONES---\n", CYAN);
 
-        NodoSimple auxiliar = lista;
+        NodoSimple<Habitacion> auxiliar = lista;
 
         if (auxiliar == null) {
             consola.mostrarTexto("No hay habitaciones creadas");
@@ -78,12 +77,12 @@ public class ListaHabitaciones {
         }
 
         while (auxiliar != null) {
-            Habitacion habitacion = (Habitacion) auxiliar.getValor();
+            Habitacion habitacion = auxiliar.getValor();
             consola.mostrarTexto("----------");
             consola.mostrarTexto(habitacion.getNumero() + " - " + habitacion.getTipoHabitacion());
-            if(habitacion.getEstadoHabitacion() == EstadoHabitacion.disponible){
+            if (habitacion.getEstadoHabitacion() == EstadoHabitacion.disponible) {
                 consola.mostrarTexto(habitacion.getEstadoHabitacion() + "", GREEN);
-            }else{
+            } else {
                 consola.mostrarTexto(habitacion.getEstadoHabitacion() + "", RED);
             }
             consola.mostrarTexto("----------\n");

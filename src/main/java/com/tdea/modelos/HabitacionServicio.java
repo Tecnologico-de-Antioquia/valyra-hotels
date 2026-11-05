@@ -3,12 +3,8 @@ package com.tdea.modelos;
 import java.util.concurrent.ThreadLocalRandom;
 
 import com.tdea.compartidos.enums.EstadoHabitacion;
-import com.tdea.compartidos.enums.Generos;
 import com.tdea.compartidos.enums.TipoHabitacion;
 import com.tdea.consola.CLI;
-import com.tdea.estructura.NodoSimple;
-import com.tdea.modelos.Habitacion;
-import com.tdea.modelos.ListaHabitaciones;
 
 public class HabitacionServicio {
     public static CLI consola = new CLI();
@@ -36,22 +32,32 @@ public class HabitacionServicio {
         }
     }
 
-    public void asignarHabitacion(Huesped huesped){
+    public void asignarHabitacion(Huesped huesped) {
         listaHabitaciones.mostrarListaHabitaciones();
 
         consola.mostrarTexto("Atendiendo a " + huesped.getNombre() + "\n");
-        
+
         Habitacion habitacion = null;
-        while(habitacion == null || habitacion.getEstadoHabitacion() == EstadoHabitacion.ocupada){
+        while (habitacion == null || habitacion.getEstadoHabitacion() == EstadoHabitacion.ocupada) {
             Integer numeroHabitacion = consola.leerNatural("Seleccione numero de habitación");
             habitacion = listaHabitaciones.buscarHabitacion(numeroHabitacion);
 
-            if(habitacion != null && habitacion.getEstadoHabitacion() == EstadoHabitacion.ocupada){
+            if (habitacion != null && habitacion.getEstadoHabitacion() == EstadoHabitacion.ocupada) {
                 consola.mostrarTexto("\nLa habitación no esta disponible\n", RED);
             }
         }
         huesped.setHabitacion(habitacion);
         habitacion.setEstadoHabitacion(EstadoHabitacion.ocupada);
         consola.mostrarTexto("\nSe ha asignado la habitación\n", GREEN);
+    }
+
+    public void liberarHabitacion(Habitacion habitacion) {
+        if (habitacion != null) {
+            habitacion.setEstadoHabitacion(EstadoHabitacion.disponible);
+        }
+    }
+
+    public void mostrarHabitaciones() {
+        listaHabitaciones.mostrarListaHabitaciones();
     }
 }

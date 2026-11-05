@@ -1,6 +1,6 @@
 package com.tdea.modelos;
 
-import com.tdea.modelos.Huesped;
+import com.tdea.compartidos.enums.EstadoHuesped;
 import com.tdea.consola.CLI;
 import com.tdea.estructura.NodoSimple;
 
@@ -27,19 +27,19 @@ public class ListaHuespedes {
 
     public Huesped buscarHuesped(String documentoHuesped) {
 
-        NodoSimple auxiliar = lista;
+        NodoSimple<Huesped> auxiliar = lista;
 
         if (auxiliar == null) {
             consola.mostrarTexto("No hay huéspedes registrados");
             return null;
         }
 
-        Huesped huesped = (Huesped) auxiliar.getValor();
+        Huesped huesped = auxiliar.getValor();
 
         while (auxiliar != null && !huesped.getDocumento().equals(documentoHuesped)) {
             auxiliar = auxiliar.getSiguiente();
             if (auxiliar != null) {
-                huesped = (Huesped) auxiliar.getValor();
+                huesped = auxiliar.getValor();
             }
         }
 
@@ -59,7 +59,7 @@ public class ListaHuespedes {
             return;
         }
 
-        NodoSimple auxiliar = lista;
+        NodoSimple<Huesped> auxiliar = lista;
 
         nuevoNodo.setSiguiente(auxiliar);
 
@@ -67,32 +67,30 @@ public class ListaHuespedes {
     }
 
     public void retirarHuesped(Huesped huespedRetiro) {
-        NodoSimple<Huesped> actual = lista;
-        NodoSimple<Huesped> anterior = null;
-
-        while (actual != null && (huespedRetiro == null || !huespedRetiro.equals(actual.getValor()))) {
-            anterior = actual;
-            actual = actual.getSiguiente();
-        }
-
-        if (actual == null) {
+        if (huespedRetiro == null) {
             consola.mostrarTexto("\nNo se pudo retirar el huésped\n", RED);
             return;
         }
 
-        if (anterior == null) {
-            lista = actual.getSiguiente();
-        } else {
-            anterior.setSiguiente(actual.getSiguiente());
+        huespedRetiro.setEstado(EstadoHuesped.retirado);
+    }
+
+    public int contarHuespedes() {
+        int cantidad = 0;
+        NodoSimple<Huesped> auxiliar = lista;
+
+        while (auxiliar != null) {
+            cantidad += 1;
+            auxiliar = auxiliar.getSiguiente();
         }
 
-        actual.setSiguiente(null);
+        return cantidad;
     }
 
     public void mostrarListaHuespedes() {
         consola.mostrarTexto("\n---LISTA DE HUESPEDES---\n", CYAN);
 
-        NodoSimple auxiliar = lista;
+        NodoSimple<Huesped> auxiliar = lista;
 
         if (auxiliar == null) {
             consola.mostrarTexto("No hay huéspedes registrados");
@@ -101,12 +99,13 @@ public class ListaHuespedes {
 
         Integer i = 1;
         while (auxiliar != null) {
-            Huesped huesped = (Huesped) auxiliar.getValor();
+            Huesped huesped = auxiliar.getValor();
             consola.mostrarTexto(i + ". " + "-----------------------");
             consola.mostrarTexto(huesped.getNombre() + " - " + huesped.getDocumento() + " - "
                     + huesped.getEdad() + " años");
             consola.mostrarTexto("Habitación: " + huesped.getHabitacion().getNumero() + " - "
                     + huesped.getHabitacion().getTipoHabitacion());
+            consola.mostrarTexto("Estado: " + huesped.getEstado());
             consola.mostrarTexto("-----------------------\n");
             auxiliar = auxiliar.getSiguiente();
             i = i + 1;

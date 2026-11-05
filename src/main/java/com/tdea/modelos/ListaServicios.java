@@ -1,6 +1,5 @@
 package com.tdea.modelos;
 
-import com.tdea.modelos.Servicio;
 import com.tdea.consola.CLI;
 import com.tdea.estructura.NodoSimple;
 
@@ -33,35 +32,37 @@ public class ListaServicios {
             return;
         }
 
-        NodoSimple auxiliar = lista;
+        NodoSimple<Servicio> auxiliar = lista;
 
-        nuevoNodo.setSiguiente(auxiliar);
+        while (auxiliar.getSiguiente() != null) {
+            auxiliar = auxiliar.getSiguiente();
+        }
 
-        lista = nuevoNodo;
+        auxiliar.setSiguiente(nuevoNodo);
     }
 
-    public Servicio buscarServicio(Integer codigoServicio){
-        
-        NodoSimple auxiliar = lista;
+    public Servicio buscarServicio(String codigoServicio) {
+
+        NodoSimple<Servicio> auxiliar = lista;
 
         if (auxiliar == null) {
             consola.mostrarTexto("No hay servicios creados");
             return null;
         }
 
-        Servicio servicio = (Servicio) auxiliar.getValor();
-        
-        while (auxiliar != null && !servicio.getCodigo().equals(codigoServicio)) {
+        Servicio servicio = auxiliar.getValor();
+
+        while (auxiliar != null && !servicio.getCodigo().equalsIgnoreCase(codigoServicio)) {
             auxiliar = auxiliar.getSiguiente();
-            if(auxiliar != null){
-                servicio = (Servicio) auxiliar.getValor();
+            if (auxiliar != null) {
+                servicio = auxiliar.getValor();
             }
         }
 
-        if(auxiliar == null){
+        if (auxiliar == null) {
             consola.mostrarTexto("\nNo se encontró el servicio\n", RED);
             return null;
-        }else{
+        } else {
             return servicio;
         }
     }
@@ -69,7 +70,7 @@ public class ListaServicios {
     public void mostrarListaServicios() {
         consola.mostrarTexto("\n---LISTA DE SERVICIOS---\n", CYAN);
 
-        NodoSimple auxiliar = lista;
+        NodoSimple<Servicio> auxiliar = lista;
 
         if (auxiliar == null) {
             consola.mostrarTexto("No hay servicios creados");
@@ -77,9 +78,10 @@ public class ListaServicios {
         }
 
         while (auxiliar != null) {
-            Servicio servicio = (Servicio) auxiliar.getValor();
+            Servicio servicio = auxiliar.getValor();
             consola.mostrarTexto("----------");
-            consola.mostrarTexto(servicio.getCodigo() + " - " + servicio.getNombre() + " - $" + servicio.getPrecio());
+            consola.mostrarTexto(servicio.getCodigo() + " - " + servicio.getNombre() + " - $"
+                    + servicio.getPrecio());
 
             consola.mostrarTexto("----------\n");
             auxiliar = auxiliar.getSiguiente();
